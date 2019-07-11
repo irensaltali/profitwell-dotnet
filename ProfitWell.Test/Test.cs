@@ -12,7 +12,7 @@ namespace Tests
         public Tests()
         {
             string apiKey = File.ReadAllText("API.key");
-            api = new ProfitWellAPI("apiKey", false);
+            api = new ProfitWellAPI(apiKey, false);
         }
         
 

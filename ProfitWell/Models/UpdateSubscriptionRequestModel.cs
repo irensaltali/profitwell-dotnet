@@ -31,6 +31,6 @@ namespace ProfitWell.Models
 
         [JsonProperty("effective_date")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public DateTime StartDate { get; set; }
+        public DateTime EffectiveDate { get; set; }
     }
 }

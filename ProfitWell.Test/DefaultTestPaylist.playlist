@@ -2,4 +2,5 @@
   <Add Test="Tests.Tests.GetAPIStatusTest" />
   <Add Test="Tests.Tests.CreateSubscriptionTest" />
   <Add Test="Tests.Tests.UpdateSubscriptionTest" />
+  <Add Test="Tests.Tests.ChurnSubscriptionTest" />
 </Playlist>

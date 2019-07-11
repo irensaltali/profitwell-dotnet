@@ -41,7 +41,7 @@ namespace ProfitWell.Models
 
         [JsonProperty("effective_date")]
         [JsonConverter(typeof(UnixDateTimeConverter))]
-        public DateTime StartDate { get; set; }
+        public DateTime EffectiveDate { get; set; }
 
         [JsonProperty("data_provider_user_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DataProviderUserId { get; set; }

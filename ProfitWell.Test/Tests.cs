@@ -8,13 +8,23 @@ namespace Tests
     public class Tests
     {
         readonly ProfitWellAPI api;
+        string Email;
+        string PlanId;
+        string SubscriptionAlias;
+        string UserAlias;
+
 
         public Tests()
         {
             string apiKey = File.ReadAllText("API.key");
             api = new ProfitWellAPI(apiKey, false);
+
+            Email = "iren5@saltali.com";
+            PlanId = "startup";
+            SubscriptionAlias = "testsub5";
+            UserAlias = "irensaltali5";
         }
-        
+
 
         [Test]
         public void GetAPIStatusTest()
@@ -27,15 +37,15 @@ namespace Tests
         {
             var model = new ProfitWell.Models.CreateSubscriptionRequestModel
             {
-                Email = "iren6@saltali.com",
+                Email = Email,
                 PlanCurrency = ProfitWell.Enum.CurrencySymbol.TRY,
-                PlanId = "startup",
+                PlanId = PlanId,
                 PlanInterval = ProfitWell.Enum.PlanInterval.month,
                 Price = 69.99M,
-                StartDate = DateTime.UtcNow,
+                EffectiveDate = DateTime.UtcNow,
                 Status = ProfitWell.Enum.Status.active,
-                SubscriptionAlias = "testsub6",
-                UserAlias = "irensaltali6"
+                SubscriptionAlias = SubscriptionAlias,
+                UserAlias = UserAlias
             };
             Assert.IsTrue(api.CreateSubscription(model).IsSuccessfull);
 
@@ -48,15 +58,30 @@ namespace Tests
         {
             var model = new ProfitWell.Models.UpdateSubscriptionRequestModel
             {
-                PlanId = "startup",
+                PlanId = PlanId,
                 PlanInterval = ProfitWell.Enum.PlanInterval.month,
                 Price = 109.99M,
-                StartDate = DateTime.UtcNow,
+                EffectiveDate = DateTime.UtcNow,
                 Status = ProfitWell.Enum.Status.active,
-                SubscriptionAlias = "testsub6",
+                SubscriptionAlias = SubscriptionAlias,
             };
 
             Assert.IsTrue(api.UpdateSubscription(model).IsSuccessfull);
+        }
+
+
+
+        [Test]
+        public void ChurnSubscriptionTest()
+        {
+            var model = new ProfitWell.Models.ChurnSubscriptionRequestModel
+            {
+                EffectiveDate = DateTime.UtcNow,
+                SubscriptionAlias = SubscriptionAlias,
+                ChurnType = ProfitWell.Enum.ChurnType.delinquent
+            };
+
+            Assert.IsTrue(api.ChurnSubscription(model).IsSuccessfull);
         }
     }
 }

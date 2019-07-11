@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ProfitWell.Models
 {
-    public class CreateSubscriptionResponseModel
+    public class ChurnSubscriptionResponseModel
     {
         [JsonIgnore]
         public bool IsSuccessfull { get; set; }

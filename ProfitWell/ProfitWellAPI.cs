@@ -1,4 +1,5 @@
-﻿using ProfitWell.Models;
+﻿using ProfitWell.Helpers;
+using ProfitWell.Models;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -79,5 +80,31 @@ namespace ProfitWell
                 throw e;
             }
         }
+
+        public ChurnSubscriptionResponseModel ChurnSubscription(ChurnSubscriptionRequestModel model) => ChurnSubscriptionAsync(model).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<ChurnSubscriptionResponseModel> ChurnSubscriptionAsync(ChurnSubscriptionRequestModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.SubscriptionId) && string.IsNullOrEmpty(model.SubscriptionAlias))
+                {
+                    throw new MissingMemberException("Either you need to set 'SubscriptionId' or 'SubscriptionAlias'");
+                }
+
+                var result = await client.DeleteAsync("v2/subscriptions/" + (string.IsNullOrEmpty(model.SubscriptionAlias) ? model.SubscriptionId : model.SubscriptionAlias) + "/" +
+                    "?effective_date="+model.EffectiveDate.ToUnixTime()+ "&churn_type="+model.ChurnType.ToString());
+                var jsonResponse = await result.Content.ReadAsStringAsync();
+
+                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<ChurnSubscriptionResponseModel>(jsonResponse);
+                response.IsSuccessfull = result.IsSuccessStatusCode;
+                return response;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }

@@ -83,5 +83,35 @@ namespace Tests
 
             Assert.IsTrue(api.ChurnSubscription(model).IsSuccessfull);
         }
+
+
+
+        [Test]
+        public void UnchurnSubscriptionTest()
+        {
+            var model = new ProfitWell.Models. UnchurnSubscriptionRequestModel
+            {
+                SubscriptionAlias = SubscriptionAlias
+            };
+
+            Assert.IsTrue(api.UnchurnSubscription(model));
+        }
+
+
+
+
+        [Test]
+        public void GetHistoryOfUserTest()
+        {
+            var model = new ProfitWell.Models.GetHistoryOfUserRequestModel
+            {
+                UserAlias= UserAlias
+            };
+
+            Assert.IsTrue(api.GetHistoryOfUser(model).IsSuccessfull);
+        }
+
+
+
     }
 }

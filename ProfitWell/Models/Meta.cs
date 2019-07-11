@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ProfitWell.Models
 {
@@ -9,5 +6,8 @@ namespace ProfitWell.Models
     {
         [JsonProperty("data_provider_user_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DataProviderUserId { get; set; }
+
+        [JsonProperty("churn_type", NullValueHandling = NullValueHandling.Ignore)]
+        public string ChurnType { get; set; }
     }
 }

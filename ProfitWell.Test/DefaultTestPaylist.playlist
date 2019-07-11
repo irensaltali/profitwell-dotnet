@@ -3,4 +3,5 @@
   <Add Test="Tests.Tests.CreateSubscriptionTest" />
   <Add Test="Tests.Tests.UpdateSubscriptionTest" />
   <Add Test="Tests.Tests.ChurnSubscriptionTest" />
+  <Add Test="Tests.Tests.GetHistoryOfUserTest" />
 </Playlist>

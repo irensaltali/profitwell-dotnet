@@ -1,6 +1,7 @@
 ﻿using ProfitWell.Helpers;
 using ProfitWell.Models;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -93,10 +94,61 @@ namespace ProfitWell
                 }
 
                 var result = await client.DeleteAsync("v2/subscriptions/" + (string.IsNullOrEmpty(model.SubscriptionAlias) ? model.SubscriptionId : model.SubscriptionAlias) + "/" +
-                    "?effective_date="+model.EffectiveDate.ToUnixTime()+ "&churn_type="+model.ChurnType.ToString());
+                    "?effective_date=" + model.EffectiveDate.ToUnixTime() + "&churn_type=" + model.ChurnType.ToString());
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<ChurnSubscriptionResponseModel>(jsonResponse);
+                response.IsSuccessfull = result.IsSuccessStatusCode;
+                return response;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        public bool UnchurnSubscription(UnchurnSubscriptionRequestModel model) => UnchurnSubscriptionAsync(model).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<bool> UnchurnSubscriptionAsync(UnchurnSubscriptionRequestModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.SubscriptionId) && string.IsNullOrEmpty(model.SubscriptionAlias))
+                {
+                    throw new MissingMemberException("Either you need to set 'SubscriptionId' or 'SubscriptionAlias'");
+                }
+                var result = await client.PutAsync("v2/unchurn/" + (string.IsNullOrEmpty(model.SubscriptionAlias) ? model.SubscriptionId : model.SubscriptionAlias) + "/", null);
+                var jsonResponse = await result.Content.ReadAsStringAsync();
+
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public GetHistoryOfUserResponseModel GetHistoryOfUser(GetHistoryOfUserRequestModel model) => GetHistoryOfUserAsync(model).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<GetHistoryOfUserResponseModel> GetHistoryOfUserAsync(GetHistoryOfUserRequestModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.UserId) && string.IsNullOrEmpty(model.UserAlias))
+                {
+                    throw new MissingMemberException("Either you need to set 'UserId' or 'UserAlias'");
+                }
+                var result = await client.GetAsync("v2/users/" + (string.IsNullOrEmpty(model.UserAlias) ? model.UserId : model.UserAlias) + "/");
+                var jsonResponse = await result.Content.ReadAsStringAsync();
+
+                
+                var history = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UserHistoryData>>(jsonResponse);
+                var response = new GetHistoryOfUserResponseModel
+                {
+                    History = history
+                };
                 response.IsSuccessfull = result.IsSuccessStatusCode;
                 return response;
             }

@@ -16,4 +16,10 @@
     <ProjectReference Include="..\ProfitWell\ProfitWell.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="API.key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

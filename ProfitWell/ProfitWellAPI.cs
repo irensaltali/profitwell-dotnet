@@ -40,35 +40,44 @@ namespace ProfitWell
                 StringContent stringContent = new StringContent(json, System.Text.Encoding.Default, "application/json");
 
                 var result = await client.PostAsync("v2/subscriptions/", stringContent);
-
-
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
-                var response = new CreateSubscriptionResponseModel();
-                response = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateSubscriptionResponseModel>(jsonResponse);
+                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateSubscriptionResponseModel>(jsonResponse);
                 response.IsSuccessfull = result.IsSuccessStatusCode;
                 return response;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
 
         }
 
-        public bool UpdateSubscription(UpdateSubscriptionRequestModel model) => UpdateSubscriptionAsync(model).ConfigureAwait(false).GetAwaiter().GetResult();
+        public UpdateSubscriptionResponseModel UpdateSubscription(UpdateSubscriptionRequestModel model) => UpdateSubscriptionAsync(model).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<bool> UpdateSubscriptionAsync(UpdateSubscriptionRequestModel model)
+        public async Task<UpdateSubscriptionResponseModel> UpdateSubscriptionAsync(UpdateSubscriptionRequestModel model)
         {
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
-            var jsonContent = new StringContent(json, System.Text.Encoding.Default, "application/json");
-
-            var result = await client.PutAsync("v2/subscriptions/", jsonContent);
-            if (result.IsSuccessStatusCode)
+            try
             {
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+                var jsonContent = new StringContent(json, System.Text.Encoding.Default, "application/json");
+
+                if (string.IsNullOrEmpty(model.SubscriptionId) && string.IsNullOrEmpty(model.SubscriptionAlias))
+                {
+                    throw new MissingMemberException("Either you need to set 'SubscriptionId' or 'SubscriptionAlias'");
+                }
+
+                var result = await client.PutAsync("v2/subscriptions/" + (string.IsNullOrEmpty(model.SubscriptionAlias) ? model.SubscriptionId : model.SubscriptionAlias) + "/", jsonContent);
                 var jsonResponse = await result.Content.ReadAsStringAsync();
+
+                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<UpdateSubscriptionResponseModel>(jsonResponse);
+                response.IsSuccessfull = result.IsSuccessStatusCode;
+                return response;
             }
-            return result.IsSuccessStatusCode;
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

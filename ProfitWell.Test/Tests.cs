@@ -46,15 +46,17 @@ namespace Tests
         [Test]
         public void UpdateSubscriptionTest()
         {
-            Assert.IsTrue(api.UpdateSubscription(new ProfitWell.Models.UpdateSubscriptionRequestModel
+            var model = new ProfitWell.Models.UpdateSubscriptionRequestModel
             {
-                PlanId = "3",
+                PlanId = "startup",
                 PlanInterval = ProfitWell.Enum.PlanInterval.month,
-                Price = 69.99M,
+                Price = 109.99M,
                 StartDate = DateTime.UtcNow,
                 Status = ProfitWell.Enum.Status.active,
-                SubscriptionAlias = "testsub",
-            }));
+                SubscriptionAlias = "testsub6",
+            };
+
+            Assert.IsTrue(api.UpdateSubscription(model).IsSuccessfull);
         }
     }
 }

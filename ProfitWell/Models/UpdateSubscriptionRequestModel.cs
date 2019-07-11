@@ -8,10 +8,10 @@ namespace ProfitWell.Models
 {
     public class UpdateSubscriptionRequestModel
     {
-        [JsonProperty("subscription_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonIgnore]
         public string SubscriptionId { get; set; }
 
-        [JsonProperty("subscription_alias", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonIgnore]
         public string SubscriptionAlias { get; set; }
 
         [JsonProperty("plan_id")]

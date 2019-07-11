@@ -19,10 +19,11 @@ namespace Tests
             string apiKey = File.ReadAllText("API.key");
             api = new ProfitWellAPI(apiKey, false);
 
-            Email = "iren5@saltali.com";
+            string different="6";
+            Email = "iren"+different+"@saltali.com";
             PlanId = "startup";
-            SubscriptionAlias = "testsub5";
-            UserAlias = "irensaltali5";
+            SubscriptionAlias = "testsub" + different;
+            UserAlias = "irensaltali" + different;
         }
 
 
@@ -109,6 +110,32 @@ namespace Tests
             };
 
             Assert.IsTrue(api.GetHistoryOfUser(model).IsSuccessfull);
+        }
+
+
+
+        [Test]
+        public void UpdateUserTest()
+        {
+            var model = new ProfitWell.Models.UpdateUserRequestModel
+            {
+                UserAlias = UserAlias,
+                Email ="iren10@saltali.com"
+            };
+
+            Assert.IsTrue(api.UpdateUser(model));
+        }
+
+
+        [Test]
+        public void DeleteUserTest()
+        {
+            var model = new ProfitWell.Models.DeleteUserRequestModel
+            {
+                UserAlias = UserAlias
+            };
+
+            Assert.IsTrue(api.DeleteUser(model));
         }
 
 

@@ -61,15 +61,15 @@ namespace ProfitWell
         {
             try
             {
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
-                var jsonContent = new StringContent(json, System.Text.Encoding.Default, "application/json");
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+                StringContent stringContent = new StringContent(json, System.Text.Encoding.Default, "application/json");
 
                 if (string.IsNullOrEmpty(model.SubscriptionId) && string.IsNullOrEmpty(model.SubscriptionAlias))
                 {
                     throw new MissingMemberException("Either you need to set 'SubscriptionId' or 'SubscriptionAlias'");
                 }
 
-                var result = await client.PutAsync("v2/subscriptions/" + (string.IsNullOrEmpty(model.SubscriptionAlias) ? model.SubscriptionId : model.SubscriptionAlias) + "/", jsonContent);
+                var result = await client.PutAsync("v2/subscriptions/" + (string.IsNullOrEmpty(model.SubscriptionAlias) ? model.SubscriptionId : model.SubscriptionAlias) + "/", stringContent);
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<UpdateSubscriptionResponseModel>(jsonResponse);
@@ -119,7 +119,6 @@ namespace ProfitWell
                     throw new MissingMemberException("Either you need to set 'SubscriptionId' or 'SubscriptionAlias'");
                 }
                 var result = await client.PutAsync("v2/unchurn/" + (string.IsNullOrEmpty(model.SubscriptionAlias) ? model.SubscriptionId : model.SubscriptionAlias) + "/", null);
-                var jsonResponse = await result.Content.ReadAsStringAsync();
 
 
                 return result.IsSuccessStatusCode;
@@ -151,6 +150,55 @@ namespace ProfitWell
                 };
                 response.IsSuccessfull = result.IsSuccessStatusCode;
                 return response;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        public bool UpdateUser(UpdateUserRequestModel model) => UpdateUserAsync(model).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<bool> UpdateUserAsync(UpdateUserRequestModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.UserId) && string.IsNullOrEmpty(model.UserAlias))
+                {
+                    throw new MissingMemberException("Either you need to set 'UserId' or 'UserAlias'");
+                }
+
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+                var stringContent = new StringContent(json, System.Text.Encoding.Default, "application/json");
+
+                var result = await client.PutAsync("v2/users/" + (string.IsNullOrEmpty(model.UserAlias) ? model.UserId : model.UserAlias) + "/", stringContent);
+
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+
+        public bool DeleteUser(DeleteUserRequestModel model) => DeleteUserAsync(model).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<bool> DeleteUserAsync(DeleteUserRequestModel model)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(model.UserId) && string.IsNullOrEmpty(model.UserAlias))
+                {
+                    throw new MissingMemberException("Either you need to set 'UserId' or 'UserAlias'");
+                }
+
+                var result = await client.DeleteAsync("v2/users/" + (string.IsNullOrEmpty(model.UserAlias) ? model.UserId : model.UserAlias) + "/");
+
+                return result.IsSuccessStatusCode;
             }
             catch (Exception e)
             {

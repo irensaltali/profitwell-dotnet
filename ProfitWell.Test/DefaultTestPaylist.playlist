@@ -1,0 +1,4 @@
+<Playlist Version="1.0">
+  <Add Test="Tests.Tests.GetAPIStatusTest" />
+  <Add Test="Tests.Tests.CreateSubscriptionTest" />
+</Playlist>

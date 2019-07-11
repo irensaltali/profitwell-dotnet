@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfitWell", "ProfitWell.csproj", "{D2018911-3F2C-4ED0-85A2-D9E00FE1870A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfitWell.Test", "..\ProfitWell.Test\ProfitWell.Test.csproj", "{DB030E9D-9B28-4505-87B3-D5BA1B61F47B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D2018911-3F2C-4ED0-85A2-D9E00FE1870A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2018911-3F2C-4ED0-85A2-D9E00FE1870A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2018911-3F2C-4ED0-85A2-D9E00FE1870A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2018911-3F2C-4ED0-85A2-D9E00FE1870A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB030E9D-9B28-4505-87B3-D5BA1B61F47B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB030E9D-9B28-4505-87B3-D5BA1B61F47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB030E9D-9B28-4505-87B3-D5BA1B61F47B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB030E9D-9B28-4505-87B3-D5BA1B61F47B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8194E394-D9DF-4AEE-AC15-F509F9A3BB68}
+	EndGlobalSection
+EndGlobal

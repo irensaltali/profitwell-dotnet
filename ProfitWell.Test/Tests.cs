@@ -25,7 +25,7 @@ namespace Tests
             PlanId = "Scale Up";
             SubscriptionAlias = "ScaleUp_irensaltali" + different;
             UserAlias = "irensaltali" + different;
-            UserId = "pwu_WYIrnAnEaSp4";
+            UserId = "pwu_Qib8QgfcZ3Tw";
         }
 
 

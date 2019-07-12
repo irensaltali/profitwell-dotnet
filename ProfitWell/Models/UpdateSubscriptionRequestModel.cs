@@ -30,7 +30,7 @@ namespace ProfitWell.Models
         public decimal Price { get; set; }
 
         [JsonProperty("effective_date")]
-        [JsonConverter(typeof(UnixDateTimeConverter))]
+        [JsonConverter(typeof(Newtonsoft.Json.Converters.UnixDateTimeConverter))]
         public DateTime EffectiveDate { get; set; }
     }
 }

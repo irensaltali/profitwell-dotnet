@@ -7,4 +7,6 @@
   <Add Test="Tests.Tests.UpdateUserTest" />
   <Add Test="Tests.Tests.DeleteUserTest" />
   <Add Test="Tests.Tests.GetPlanIdsTest" />
+  <Add Test="Tests.Tests.ExcludeCustomerTest" />
+  <Add Test="Tests.Tests.GetCompanySettingsTest" />
 </Playlist>

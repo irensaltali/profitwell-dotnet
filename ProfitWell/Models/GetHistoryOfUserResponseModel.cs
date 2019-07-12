@@ -7,12 +7,8 @@ using System.Collections.Generic;
 
 namespace ProfitWell.Models
 {
-    public class GetHistoryOfUserResponseModel
+    public class GetHistoryOfUserResponseModel : BaseResponseModel
     {
-
-        [JsonIgnore]
-        public bool IsSuccessfull { get; set; }
-
         public List<UserHistoryData> History { get; set; }
     }
 
@@ -54,7 +50,7 @@ namespace ProfitWell.Models
         public decimal Price { get; set; }
 
         [JsonProperty("effective_date")]
-        [JsonConverter(typeof(UnixDateTimeConverter))]
+        [JsonConverter(typeof(Newtonsoft.Json.Converters.UnixDateTimeConverter))]
         public DateTime EffectiveDate { get; set; }
 
         [JsonProperty("meta", NullValueHandling = NullValueHandling.Ignore)]

@@ -207,9 +207,9 @@ namespace ProfitWell
         }
 
 
-        public GetPlanIdsResponesModel GetPlanIds(int limit = 150) => GetPlanIdsAsync(limit).ConfigureAwait(false).GetAwaiter().GetResult();
+        public GetPlanIdsResponseModel GetPlanIds(int limit = 150) => GetPlanIdsAsync(limit).ConfigureAwait(false).GetAwaiter().GetResult();
 
-        public async Task<GetPlanIdsResponesModel> GetPlanIdsAsync(int limit = 150)
+        public async Task<GetPlanIdsResponseModel> GetPlanIdsAsync(int limit = 150)
         {
             try
             {
@@ -217,7 +217,50 @@ namespace ProfitWell
                 var result = await client.GetAsync("v2/metrics/plans/?limit=" + limit);
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
-                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlanIdsResponesModel>(jsonResponse);
+                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlanIdsResponseModel>(jsonResponse);
+                response.IsSuccessfull = result.IsSuccessStatusCode;
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        public bool ExcludeCustomer(string userId) => ExcludeCustomerAsync(userId).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<bool> ExcludeCustomerAsync(string userId)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(userId))
+                {
+                    throw new MissingMemberException("You need to set 'userId'");
+                }
+
+                var result = await client.PostAsync("v2/metrics/exclude_customer/" + userId + "/", null);
+
+                return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public GetCompanySettingsResponseModel GetCompanySettings() => GetCompanySettingsAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<GetCompanySettingsResponseModel> GetCompanySettingsAsync()
+        {
+            try
+            {
+
+                var result = await client.GetAsync("v2/company/settings/");
+                var jsonResponse = await result.Content.ReadAsStringAsync();
+
+                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetCompanySettingsResponseModel>(jsonResponse);
                 response.IsSuccessfull = result.IsSuccessStatusCode;
 
                 return response;

@@ -16,7 +16,7 @@
     <Product>ProfitWell .Net Core Client</Product>
     <Authors>İren Saltalı</Authors>
     <Description>This project produced as .net core client for ProfitWell API.</Description>
-    <Copyright>İren Saltalı</Copyright>
+    <Copyright>Copyright (c) 2019 İren SALTALI</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/irensaltali/profitwell-net-core</PackageProjectUrl>
     <RepositoryUrl>https://github.com/irensaltali/profitwell-net-core.git</RepositoryUrl>

@@ -145,6 +145,21 @@ namespace Tests
         }
 
 
+        [Test]
+        public void ExcludeCustomerTest()
+        {
+            Assert.IsTrue(api.ExcludeCustomer(""));
+        }
+
+
+
+        [Test]
+        public void GetCompanySettingsTest()
+        {
+            Assert.IsTrue(api.GetCompanySettings().IsSuccessfull);
+        }
+
+
 
     }
 }

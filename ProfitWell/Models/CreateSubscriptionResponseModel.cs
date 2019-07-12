@@ -7,11 +7,8 @@ using System.Collections.Generic;
 
 namespace ProfitWell.Models
 {
-    public class CreateSubscriptionResponseModel
+    public class CreateSubscriptionResponseModel : BaseResponseModel
     {
-        [JsonIgnore]
-        public bool IsSuccessfull { get; set; }
-
         [JsonProperty("user_id", NullValueHandling = NullValueHandling.Ignore)]
         public string UserId { get; set; }
 
@@ -47,16 +44,10 @@ namespace ProfitWell.Models
         public decimal Price { get; set; }
 
         [JsonProperty("effective_date")]
-        [JsonConverter(typeof(UnixDateTimeConverter))]
+        [JsonConverter(typeof(Newtonsoft.Json.Converters.UnixDateTimeConverter))]
         public DateTime EffectiveDate { get; set; }
 
         [JsonProperty("meta", NullValueHandling = NullValueHandling.Ignore)]
         public Meta Meta { get; set; }
-
-        [JsonProperty("non_field_errors", NullValueHandling = NullValueHandling.Ignore)]
-        public List<string> NonFieldErrors { get; set; }
-
-        [JsonIgnore]
-        public string Error{ get; set; }
     }
 }

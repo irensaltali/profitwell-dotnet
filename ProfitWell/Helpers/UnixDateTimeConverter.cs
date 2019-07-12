@@ -4,7 +4,7 @@ using System;
 
 namespace ProfitWell.Helpers
 {
-    public class UnixDateTimeConverterss : DateTimeConverterBase
+    public class UnixDateTimeConverter : DateTimeConverterBase
     {
         //public override object ReadJson(JsonReader reader, Type objectType, JsonSerializer serializer)
         //{

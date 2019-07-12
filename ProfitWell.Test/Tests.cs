@@ -12,6 +12,7 @@ namespace Tests
         string PlanId;
         string SubscriptionAlias;
         string UserAlias;
+        string UserId;
 
 
         public Tests()
@@ -21,9 +22,10 @@ namespace Tests
 
             string different="6";
             Email = "iren"+different+"@saltali.com";
-            PlanId = "startup";
-            SubscriptionAlias = "testsub" + different;
+            PlanId = "Scale Up";
+            SubscriptionAlias = "ScaleUp_irensaltali" + different;
             UserAlias = "irensaltali" + different;
+            UserId = "pwu_WYIrnAnEaSp4";
         }
 
 
@@ -48,6 +50,7 @@ namespace Tests
                 SubscriptionAlias = SubscriptionAlias,
                 UserAlias = UserAlias
             };
+
             Assert.IsTrue(api.CreateSubscription(model).IsSuccessfull);
 
             Assert.IsFalse(api.CreateSubscription(model).IsSuccessfull);
@@ -70,8 +73,7 @@ namespace Tests
             Assert.IsTrue(api.UpdateSubscription(model).IsSuccessfull);
         }
 
-
-
+        
         [Test]
         public void ChurnSubscriptionTest()
         {
@@ -86,7 +88,6 @@ namespace Tests
         }
 
 
-
         [Test]
         public void UnchurnSubscriptionTest()
         {
@@ -99,8 +100,6 @@ namespace Tests
         }
 
 
-
-
         [Test]
         public void GetHistoryOfUserTest()
         {
@@ -111,7 +110,6 @@ namespace Tests
 
             Assert.IsTrue(api.GetHistoryOfUser(model).IsSuccessfull);
         }
-
 
 
         [Test]
@@ -148,7 +146,7 @@ namespace Tests
         [Test]
         public void ExcludeCustomerTest()
         {
-            Assert.IsTrue(api.ExcludeCustomer(""));
+            Assert.IsTrue(api.ExcludeCustomer(UserId));
         }
 
 

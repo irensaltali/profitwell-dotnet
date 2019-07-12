@@ -3,6 +3,7 @@
   <Add Test="Tests.Tests.CreateSubscriptionTest" />
   <Add Test="Tests.Tests.UpdateSubscriptionTest" />
   <Add Test="Tests.Tests.ChurnSubscriptionTest" />
+  <Add Test="Tests.Tests.UnchurnSubscriptionTest" />
   <Add Test="Tests.Tests.GetHistoryOfUserTest" />
   <Add Test="Tests.Tests.UpdateUserTest" />
   <Add Test="Tests.Tests.DeleteUserTest" />

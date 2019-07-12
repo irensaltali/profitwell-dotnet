@@ -142,7 +142,7 @@ namespace ProfitWell
                 var result = await client.GetAsync("v2/users/" + (string.IsNullOrEmpty(model.UserAlias) ? model.UserId : model.UserAlias) + "/");
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
-                
+
                 var history = Newtonsoft.Json.JsonConvert.DeserializeObject<List<UserHistoryData>>(jsonResponse);
                 var response = new GetHistoryOfUserResponseModel
                 {
@@ -199,6 +199,28 @@ namespace ProfitWell
                 var result = await client.DeleteAsync("v2/users/" + (string.IsNullOrEmpty(model.UserAlias) ? model.UserId : model.UserAlias) + "/");
 
                 return result.IsSuccessStatusCode;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        public GetPlanIdsResponesModel GetPlanIds(int limit = 150) => GetPlanIdsAsync(limit).ConfigureAwait(false).GetAwaiter().GetResult();
+
+        public async Task<GetPlanIdsResponesModel> GetPlanIdsAsync(int limit = 150)
+        {
+            try
+            {
+
+                var result = await client.GetAsync("v2/metrics/plans/?limit=" + limit);
+                var jsonResponse = await result.Content.ReadAsStringAsync();
+
+                var response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlanIdsResponesModel>(jsonResponse);
+                response.IsSuccessfull = result.IsSuccessStatusCode;
+
+                return response;
             }
             catch (Exception e)
             {

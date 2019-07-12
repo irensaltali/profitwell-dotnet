@@ -6,4 +6,5 @@
   <Add Test="Tests.Tests.GetHistoryOfUserTest" />
   <Add Test="Tests.Tests.UpdateUserTest" />
   <Add Test="Tests.Tests.DeleteUserTest" />
+  <Add Test="Tests.Tests.GetPlanIdsTest" />
 </Playlist>

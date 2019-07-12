@@ -138,6 +138,12 @@ namespace Tests
             Assert.IsTrue(api.DeleteUser(model));
         }
 
+        [Test]
+        public void GetPlanIdsTest()
+        {
+            Assert.IsTrue(api.GetPlanIds().IsSuccessfull);
+        }
+
 
 
     }

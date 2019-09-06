@@ -10,6 +10,12 @@ namespace ProfitWell
     public class ProfitWellAPI
     {
         private static readonly HttpClient client = new HttpClient();
+
+        /// <summary>
+        /// Init ProfitWellAPI
+        /// </summary>
+        /// <param name="APIKey">Use your API Key from https://www2.profitwell.com/app/account/integrations </param>
+        /// <param name="Test">Set true to use mock server</param>
         public ProfitWellAPI(string APIKey, bool Test = false)
         {
             client.DefaultRequestHeaders.Clear();
@@ -24,14 +30,31 @@ namespace ProfitWell
             client.DefaultRequestHeaders.Add("Authorization", APIKey);
         }
 
+        /// <summary>
+        /// This method returns true if the API is operational and if you've properly authenticated. If you haven't' 
+        /// authenticated properly, the endpoint returns false.
+        /// </summary>
+        /// <returns>true or false</returns>
         public bool GetAPIStatus() => GetAPIStatusAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
+        /// <summary>
+        /// This method returns true if the API is operational and if you've properly authenticated. If you haven't' 
+        /// authenticated properly, the endpoint returns false.
+        /// </summary>
+        /// <returns>true or false</returns>
         public async Task<bool> GetAPIStatusAsync()
         {
             var result = await client.GetAsync("v2/api-status/");
             return result.IsSuccessStatusCode;
         }
 
+        /// <summary>
+        /// Create a new subscription. Can be for a new user, or a user who already has another subscription. 
+        /// It is important that you store either the SubscriptionAlias that you use to create this subscription, 
+        /// or the SubscriptionId that ProfitWell returns in the response, so that you can update/churn this subscription 
+        /// at a later date.IMPORTANT: If you are creating multiple subscriptions for the same user, it is important that 
+        /// you wait for a response from the API after creating the first subscription before creating subsequent subscriptions.
+        /// </summary>
         public CreateSubscriptionResponseModel CreateSubscription(CreateSubscriptionRequestModel model) => CreateSubscriptionAsync(model).ConfigureAwait(false).GetAwaiter().GetResult();
 
         public async Task<CreateSubscriptionResponseModel> CreateSubscriptionAsync(CreateSubscriptionRequestModel model)

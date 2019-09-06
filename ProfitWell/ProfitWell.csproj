@@ -16,7 +16,7 @@
   </ItemGroup>
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;netcoreapp2.2</TargetFrameworks>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>irensaltali.com</Company>
     <Product>ProfitWell .Net Client</Product>
     <Authors>İren Saltalı</Authors>
@@ -29,6 +29,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Version>1.0.1</Version>
+    <PackageIconUrl>https://github.com/irensaltali/profitwell-dotnet/raw/master/logo.jpg</PackageIconUrl>
   </PropertyGroup>
 
 </Project>

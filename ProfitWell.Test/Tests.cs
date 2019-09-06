@@ -20,8 +20,8 @@ namespace Tests
             string apiKey = File.ReadAllText("API.key");
             api = new ProfitWellAPI(apiKey, false);
 
-            string different="6";
-            Email = "iren"+different+"@saltali.com";
+            string different = "6";
+            Email = "iren" + different + "@saltali.com";
             PlanId = "Scale Up";
             SubscriptionAlias = "ScaleUp_irensaltali" + different;
             UserAlias = "irensaltali" + different;
@@ -73,7 +73,7 @@ namespace Tests
             Assert.IsTrue(api.UpdateSubscription(model).IsSuccessfull);
         }
 
-        
+
         [Test]
         public void ChurnSubscriptionTest()
         {
@@ -91,7 +91,7 @@ namespace Tests
         [Test]
         public void UnchurnSubscriptionTest()
         {
-            var model = new ProfitWell.Models. UnchurnSubscriptionRequestModel
+            var model = new ProfitWell.Models.UnchurnSubscriptionRequestModel
             {
                 SubscriptionAlias = SubscriptionAlias
             };
@@ -105,7 +105,7 @@ namespace Tests
         {
             var model = new ProfitWell.Models.GetHistoryOfUserRequestModel
             {
-                UserAlias= UserAlias
+                UserAlias = UserAlias
             };
 
             Assert.IsTrue(api.GetHistoryOfUser(model).IsSuccessfull);
@@ -118,7 +118,7 @@ namespace Tests
             var model = new ProfitWell.Models.UpdateUserRequestModel
             {
                 UserAlias = UserAlias,
-                Email ="iren10@saltali.com"
+                Email = "iren10@saltali.com"
             };
 
             Assert.IsTrue(api.UpdateUser(model));

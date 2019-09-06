@@ -1,4 +1,4 @@
-# profitwell-net-core
+# profitwell-dotnet
 
 ![Nuget](https://img.shields.io/nuget/v/ProfitWell.svg)
 ![GitHub](https://img.shields.io/github/license/irensaltali/profitwell-net-core.svg)

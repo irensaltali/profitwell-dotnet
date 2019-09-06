@@ -9,7 +9,7 @@ namespace ProfitWell
 {
     public class ProfitWellAPI
     {
-        private static readonly HttpClient client = new HttpClient();
+        private readonly HttpClient client;
 
         /// <summary>
         /// Init ProfitWellAPI
@@ -18,6 +18,11 @@ namespace ProfitWell
         /// <param name="Test">Set true to use mock server</param>
         public ProfitWellAPI(string APIKey, bool Test = false)
         {
+            if(client== null)
+            {
+                client = new HttpClient();
+            }
+
             client.DefaultRequestHeaders.Clear();
             if (Test)
             {
@@ -73,6 +78,10 @@ namespace ProfitWell
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateSubscriptionResponseModel>(jsonResponse);
+                if (response == null)
+                {
+                    response = new CreateSubscriptionResponseModel();
+                }
                 response.IsSuccessfull = result.IsSuccessStatusCode;
                 return response;
             }

@@ -101,8 +101,13 @@ namespace ProfitWell
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<UpdateSubscriptionResponseModel>(jsonResponse);
+                if (response == null)
+                {
+                    response = new UpdateSubscriptionResponseModel();
+                }
                 response.IsSuccessfull = result.IsSuccessStatusCode;
                 return response;
+
             }
             catch (Exception e)
             {
@@ -126,6 +131,10 @@ namespace ProfitWell
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<ChurnSubscriptionResponseModel>(jsonResponse);
+                if (response == null)
+                {
+                    response = new ChurnSubscriptionResponseModel();
+                }
                 response.IsSuccessfull = result.IsSuccessStatusCode;
                 return response;
             }
@@ -246,6 +255,10 @@ namespace ProfitWell
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetPlanIdsResponseModel>(jsonResponse);
+                if (response == null)
+                {
+                    response = new GetPlanIdsResponseModel();
+                }
                 response.IsSuccessfull = result.IsSuccessStatusCode;
 
                 return response;
@@ -289,6 +302,10 @@ namespace ProfitWell
                 var jsonResponse = await result.Content.ReadAsStringAsync();
 
                 var response = Newtonsoft.Json.JsonConvert.DeserializeObject<GetCompanySettingsResponseModel>(jsonResponse);
+                if (response == null)
+                {
+                    response = new GetCompanySettingsResponseModel();
+                }
                 response.IsSuccessfull = result.IsSuccessStatusCode;
 
                 return response;

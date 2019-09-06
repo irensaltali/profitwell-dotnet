@@ -9,13 +9,18 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.2.0\ref\netcoreapp2.2\System.Net.Http.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp2.2</TargetFrameworks>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Company>irensaltali.com</Company>
-    <Product>ProfitWell .Net Core Client</Product>
+    <Product>ProfitWell .Net Client</Product>
     <Authors>İren Saltalı</Authors>
-    <Description>This project produced as .net core client for ProfitWell API.</Description>
+    <Description>This project produced as .net client for ProfitWell API.</Description>
     <Copyright>Copyright (c) 2019 İren SALTALI</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/irensaltali/profitwell-net-core</PackageProjectUrl>
@@ -23,6 +28,7 @@
     <RepositoryType>git</RepositoryType>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 </Project>

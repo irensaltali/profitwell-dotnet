@@ -9,7 +9,7 @@ namespace ProfitWell
 {
     public class ProfitWellAPI
     {
-        private static readonly HttpClient client = new HttpClient();
+        private readonly HttpClient client = null;
 
         /// <summary>
         /// Init ProfitWellAPI
@@ -18,6 +18,11 @@ namespace ProfitWell
         /// <param name="Test">Set true to use mock server</param>
         public ProfitWellAPI(string APIKey, bool Test = false)
         {
+            if (client == null)
+            {
+                client = new HttpClient();
+            }
+
             client.DefaultRequestHeaders.Clear();
             if (Test)
             {
